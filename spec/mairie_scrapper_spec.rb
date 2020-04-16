@@ -1,6 +1,6 @@
 require_relative '../lib/mairie_scrapper'
 
-describe "the mairie crypto app" do
+describe "the scrapping mairie app" do
     it "should not return an empty name array" do
         expect(scrapping_mairie_name).not_to be_nil
     end
