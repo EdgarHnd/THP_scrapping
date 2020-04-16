@@ -1,7 +1,7 @@
 require 'nokogiri'
 require 'open-uri'
 
-def scrapping_marie_name
+def scrapping_mairie_name
     name_array = Array.new
     page = Nokogiri::HTML(open("http://annuaire-des-mairies.com/val-d-oise.html"))  
     list_names = page.xpath("//table//a[@class = 'lientxt']")
@@ -11,7 +11,7 @@ def scrapping_marie_name
     return name_array
 end
 
-def scrapping_marie_link
+def scrapping_mairie_link
     link_array = Array.new
     page = Nokogiri::HTML(open("http://annuaire-des-mairies.com/val-d-oise.html"))  
     list_names = page.xpath("//table//a[@class = 'lientxt']")
@@ -22,9 +22,9 @@ def scrapping_marie_link
     return link_array
 end
 
-def scrapping_marie_email
+def scrapping_mairie_email
     email_array = Array.new
-    scrapping_marie_link.each do |link|
+    scrapping_mairie_link.each do |link|
         page = Nokogiri::HTML(open("http://annuaire-des-mairies.com#{link}.html"))
         puts "scrapping : #{page.xpath("/html/body/div/main/section[2]/div/table/tbody/tr[4]/td[2]").text}"  
         email_array << page.xpath("/html/body/div/main/section[2]/div/table/tbody/tr[4]/td[2]").text
@@ -32,7 +32,7 @@ def scrapping_marie_email
     return email_array
 end
 
-def final_array(name,email)
+def final_mairie_array(name,email)
     final_array = Array.new
     name.each do |k|
         result = Hash.new
@@ -42,4 +42,4 @@ def final_array(name,email)
     return final_array
 end
 
-puts final_array(scrapping_marie_name,scrapping_marie_email)
+puts final_mairie_array(scrapping_mairie_name,scrapping_mairie_email)
